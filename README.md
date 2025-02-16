@@ -1,7 +1,7 @@
 # Profily
 <p align="center">
 
- <img src="image.png">
+ <img src="profily.png">
 
  <br>
 Profily is a personalized career consulting web application that leverages the power of **DeepSeek R1** to provide tailored career advice based on user input. The tool helps users explore suitable career paths, industries, and actionable next steps based on their educational background, skills, preferences, and location.
