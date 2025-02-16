@@ -1,0 +1,214 @@
+
+      /* Importing Audiowide Font */
+      @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+      /* Global Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000; /* Black background */
+        color: #fff; /* White text */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+        flex-direction: column;
+      }
+
+      /* Container Styles */
+      .container {
+        max-width: 1000px; /* Increased container size */
+        width: 90%;
+        background: #1a1a1a; /* Dark gray background */
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); /* Green glow effect */
+        text-align: center;
+        height: auto; /* Allow container to expand naturally */
+      }
+
+      /* Heading Styles */
+      h2 {
+        font-size: 48px;
+        color: #00ff00; /* Neon Green */
+        text-align: center;
+        margin-bottom: 10px;
+        font-family: "Audiowide", sans-serif;
+        text-shadow: 0 0 10px #34fc34, 0 0 20px #4ded4d; /* Green glow effect */
+      }
+
+      /* Subtitle Styles */
+      .subtitle {
+        font-size: 20px; /* Slightly smaller than heading */
+        color: #00ff00; /* Neon Green */
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: "Audiowide", sans-serif; /* Same font as heading */
+      }
+
+      /* Label Styles */
+      label {
+        font-weight: bold;
+        display: block;
+        text-align: left;
+        color: #ccc; /* Light gray text for labels */
+        margin-bottom: 10px;
+      }
+
+      /* Input, Select, and Textarea Styles */
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #444; /* Dark gray border */
+        background-color: #333; /* Dark gray input background */
+        color: #fff; /* White text */
+        font-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Green outline on focus */
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #28a745; /* Green border */
+        outline: none;
+        box-shadow: 0 0 10px #28a745; /* Green glow effect */
+      }
+
+      /* Textarea Styles (Smaller query box) */
+      textarea {
+        height: 80px; /* Reduced height */
+        resize: vertical;
+      }
+
+      /* Button Styles */
+      button {
+        width: 100%;
+        padding: 15px;
+        background: #29b20d; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+        margin-top: 20px;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #218838; /* Darker green on hover */
+      }
+
+      /* Page Scrollbar Styles */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a; /* Dark gray track */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #02ca02; /* Neon Green */
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00cc00; /* Slightly darker green */
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8); /* Dimmed background */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: #1a1a1a; /* Dark gray background */
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); /* Green glow effect */
+        max-width: 800px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .modal-header {
+        font-size: 24px;
+        color: #00ff00; /* Neon Green */
+        font-family: "Audiowide", sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-body {
+        font-size: 16px;
+        text-align: left;
+        color: #ccc; /* Light gray text */
+        line-height: 1.6;
+        white-space: pre-line; /* Preserve newlines */
+      }
+
+      .modal-body strong {
+        color: #00ff00; /* Neon Green for bold text */
+      }
+
+      .modal-body h3 {
+        color: #00ff00; /* Neon Green for headings */
+        font-family: "Audiowide", sans-serif;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #29b20d; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-close:hover {
+        background: #218838; /* Darker green on hover */
+      }
+     
+      .copy-button {
+        background: #29b20d; /* Green button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background 0.3s ease;
+      }
+
+      .copy-button:hover {
+        background: #218838; /* Darker green on hover */
+      }

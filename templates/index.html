@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>Profily - Career Mentor</title>
+    
+  </head>
+  <body>
+    <!-- Container -->
+    <div class="container">
+      <h2>Profily</h2>
+      <p class="subtitle">Career Mentor for Students</p>
+      <form id="careerForm">
+        <label>1.	What is your current educational level?</label>
+        <input type="text" name="ans1" required />
+
+        <label>2.	What subjects or fields interest you the most?</label>
+        <input type="text" name="ans2" required />
+
+        <label>3.	What are your top skills or strengths? (e.g., problem-solving, creativity, leadership)</label>
+        <input type="text" name="ans3" required />
+
+        <label>4.	Do you prefer working with technology, people, numbers, or creative tasks?</label>
+        <input type="text" name="ans4" required />
+
+        <label>5.	Do you want a high-paying career or one that aligns with your passion?</label>
+        <input type="text" name="ans5" required />
+
+        <label>6. Would you prefer a stable job or a dynamic, high-growth field?</label>
+        <input type="text" name="ans6" required />
+
+        <label>7.	Are you open to relocating for better career opportunities?</label>
+        <input type="text" name="ans7" required />
+
+        <label>8.	Do you prefer working alone or in a team?</label>
+        <input type="text" name="ans8" required />
+
+        <label>9.	Would you rather work in an office, remotely, or in the field?</label>
+        <input type="text" name="ans9" required />
+
+        <label>10.	Do you plan to pursue higher education or certifications?</label>
+        <input type="text" name="ans10" required />
+
+        <label>11. Which country are you from?</label>
+        <input type="text" name="ans11" required />
+
+        <label>12. Additional details:</label>
+        <textarea name="ans12"></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+     
+    <!-- Modal Popup -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-header">Your Career Path</div>
+        <div class="modal-body" id="modalBody">
+          <!-- AI-generated response will be displayed here -->
+        </div>
+        <button class="copy-button" id="copyButton">Copy Text</button>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript to handle form submission, modal display, and text rendering
+      const form = document.getElementById("careerForm");
+      const modal = document.getElementById("modal");
+      const modalBody = document.getElementById("modalBody");
+      const modalClose = document.getElementById("modalClose");
+      const copyButton = document.getElementById("copyButton");
+
+      // Prevent form submission and display modal
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+
+        // Show loading message in the modal
+        modalBody.innerHTML = "Processing your request...";
+        modal.style.display = "flex"; // Show the modal
+
+        // Send form data to the backend API
+        fetch("/get_career_advice", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Render the response with proper formatting
+            const formattedResponse = renderMarkdown(data.response);
+            modalBody.innerHTML = formattedResponse;
+          })
+          .catch((error) => {
+            modalBody.innerHTML = "Error fetching response. Please try again.";
+          });
+      });
+
+      // Close the modal when the close button is clicked
+      modalClose.addEventListener("click", function () {
+        modal.style.display = "none"; // Hide the modal
+      });
+
+      // Close the modal when clicking outside the modal content
+      window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+      // Copy the modal content to clipboard
+      copyButton.addEventListener("click", function () {
+        const textToCopy = modalBody.innerText; // Get plain text without HTML tags
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            alert("Text copied to clipboard!");
+          })
+          .catch(() => {
+            alert("Failed to copy text.");
+          });
+      });
+       // Prevent closing when clicking outside the popup
+    document.getElementById('overlay').addEventListener('click', function(event) {
+        event.stopPropagation();  // Prevents the popup from closing when clicking outside
+    });
+      // Function to render markdown-like text
+      function renderMarkdown(text) {
+        // Convert *text* to <strong>text</strong>
+      text = text.replace(/\*(.*?)\*/g, "<strong>$1</strong>");
+
+      // Convert # Heading to <h1>Heading</h1>
+      text = text.replace(/^#\s+(.*)/gm, "<h1>$1</h1>");
+      // Convert ## Heading to <h2>Heading</h2>
+      text = text.replace(/^##\s+(.*)/gm, "<h2>$1</h2>");
+      // Convert ### Heading to <h3>Heading</h3>
+      text = text.replace(/^###\s+(.*)/gm, "<h3>$1</h3>");
+      // Convert #### Heading to <h4>Heading</h4>
+      text = text.replace(/^####\s+(.*)/gm, "<h4>$1</h4>");
+      // Convert ##### Heading to <h5>Heading</h5>
+      text = text.replace(/^#####\s+(.*)/gm, "<h5>$1</h5>");
+      // Convert ###### Heading to <h6>Heading</h6>
+      text = text.replace(/^######\s+(.*)/gm, "<h6>$1</h6>");
+
+      // Convert - List items to <ul><li></li></ul>
+      text = text.replace(/(?:^|\n)-\s+(.*)/g, "<ul><li>$1</li></ul>");
+      // Merge consecutive <ul> tags
+      text = text.replace(/<\/ul>\n<ul>/g, "");
+
+     // Convert 1. List items to <ol><li></li></ol>
+    text = text.replace(/(?:^|\n)(\d+\.\s+.*(?:\n\d+\.\s+.*)*)/g, function(match) {
+        const items = match.trim().split("\n").map(item => `<li>${item.replace(/^\d+\.\s*/, '')}</li>`).join("");
+        return `<ol>${items}</ol>`;
+    });
+
+      // Convert --- or *** to <hr>
+      text = text.replace(/^(\-\-\-|\*\*\*)$/gm, "<hr>");
+
+      // Convert [text](url) to <a href="url">text</a>
+      text = text.replace(/\[(.*?)\]\((.*?)\)/g, "<a href='$2' target='_blank'>$1</a>");
+
+      // Convert inline code `code` to <code>code</code>
+      text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+      // Convert blockquotes > text to <blockquote>text</blockquote>
+      text = text.replace(/^>\s+(.*)/gm, "<blockquote>$1</blockquote>");
+
+      // Convert double line breaks to paragraphs
+      text = text.replace(/(?:\n\s*){2,}/g, "</p><p>");
+
+      // Wrap content with <p> tags if not already wrapped
+      text = "<p>" + text + "</p>";
+
+      // Clean up any malformed tags
+      text = text.replace(/<p><\/p>/g, "");
+
+        return text;
+      }
+    </script>
+  </body>
+</html>
