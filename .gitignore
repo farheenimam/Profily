@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+env/
+venv/
+ENV/
+
+# Environment variables
+.env
+*.env
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
