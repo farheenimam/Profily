@@ -63,7 +63,6 @@ python app.py
 
 ## Usage
 
-- Open your web browser and go to `http://localhost:5000`.
 - Enter your career-related information.
 - Receive personalized career advice with external resources and university/scholarship links.
 
@@ -109,5 +108,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **DeepSeek R1** - AI model powering career advice generation.
 - **OpenAI API** - API integration for intelligent career suggestions.
 
+For further details, refer to the project's documentation or contact the developer at [farheenimam331@gmail.com](mailto:farheenimam331@gmail.com).
 Thank you for choosing **Profily**!
 
